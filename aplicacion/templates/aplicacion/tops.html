@@ -201,23 +201,13 @@
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
                     </div>
+
+                </section> 
+            </nav> 
+                <div class="text-center">    
+                <a class="btn btn-primary" href="{% url 'create_top' %}">Create New Top</a>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <h2>New top</h2>
-    <div></div>
-    <form action="" method="POST">
-        {% csrf_token %} 
-        <table>
-            {{ form.as_table }}
-        </table>
-        <div></div>
-        <input type="submit" value="Create New Item">
-    </form>
-
-
+            </nav> 
 </section>
 <!-- Footer-->
 <footer class="py-5 bg-dark">

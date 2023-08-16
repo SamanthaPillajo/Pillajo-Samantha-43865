@@ -21,23 +21,23 @@
                 <a class="navbar-brand" href="{% url 'home' %}">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    {% if user.is_authenticated  %}
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link" href="{% url 'tops' %}">Tops</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'bottoms' %}">Bottoms</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'shoes' %}">Shoes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'accessories' %}">Accesories</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About me</a></li>
-                        
+                        <li class="nav-item"><a class="nav-link" href="{% url 'aboutme' %}">About me</a></li>
+                        <a class="btn btn-primary" href="{% url 'logout' %}">Log Out</a>
                     </ul>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                    </form>
-            
+                  
                     <a class="btn btn-primary" href="{% url 'admin:index' %}">Admin</a>
+
+                    {% else %}
+                    <a class="btn btn-primary" href="{% url 'login' %}">Log In</a>
+                    <a class="btn btn-primary" href="{% url 'register' %}">Sign Up</a>
+                    {% endif %}
+
                 </div>
             </div>
         </nav>
