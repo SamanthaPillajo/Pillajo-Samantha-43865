@@ -1,0 +1,26 @@
+{% extends 'aplicacion/home.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for termino in resultados %}
+        <tr>
+            <td>{{ termino.name}}</td>
+            <td>{{ termino.size }}</td>
+            <td>{{ termino.price }}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock contenido %}
