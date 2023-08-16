@@ -58,7 +58,7 @@ def busqueda_view(request):
         'resultados': resultados,
     }
 
-    return render(request, 'busqueda.html', context)
+    return render(request, 'aplicacion/busqueda.html', context)
 
 
 #CRUD create
