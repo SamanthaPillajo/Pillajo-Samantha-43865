@@ -16,8 +16,11 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request,'aplicacion/home.html')
 
+@login_required
 def tops_view(request):
-    return render(request, "aplicacion/tops.html")
+    ctx = {"top": tops.objects.all() }
+    return render(request, "aplicacion/tops.html", ctx)
+
 
 def bottoms_view(request):
     return render(request, "aplicacion/bottoms.html")
@@ -81,30 +84,27 @@ class AccessoriesCreate(LoginRequiredMixin, CreateView):
 #login
 def login_request(request):
     if request.method == "POST":
-        miForm = AuthenticationForm(request, data=request.POST)
+        miForm = AuthenticationForm(data=request.POST)
         if miForm.is_valid():
             user = miForm.cleaned_data.get('username')
             password = miForm.cleaned_data.get('password')
-            user_2 = authenticate(username=user, password=password)
-            if user_2 is not None:
-                login(request, user)
-
+            user_authenticated = authenticate(username=user, password=password)
+            if user_authenticated is not None:
+                login(request, user_authenticated)
                 try:
                     avatar = Avatar.objects.get(user=request.user.id).image.url
                 except:
                     avatar = '/media/avatars/default.png'
                 finally:
                     request.session['avatar'] = avatar
-                
                 return render(request, "aplicacion/home.html", {"message": f"Welcome {user}"})
             else:
-                return render(request, "aplicacion/login.html", {"form":miForm, "message": "Invalid data"})
-        else:    
-            return render(request, "aplicacion/login.html", {"form":miForm, "message": "Invalid data"})
+                return render(request, "aplicacion/login.html", {"form": miForm, "message": "Invalid data"})
+        else:
+            return render(request, "aplicacion/login.html", {"form": miForm, "message": "Invalid data"})
 
     miForm = AuthenticationForm()
-
-    return render(request, "aplicacion/login.html", {"form":miForm})    
+    return render(request, "aplicacion/login.html", {"form": miForm})
 
 
 
