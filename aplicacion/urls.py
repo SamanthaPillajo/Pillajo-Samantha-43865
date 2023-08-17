@@ -13,20 +13,20 @@ urlpatterns = [
     path('accessories/', accessories_view, name="accessories" ),
     path('aboutme/', aboutme, name="aboutme" ),
 
-    #path('searchProduct/', searchProduct, name="search_Product" ),
-    #path('search2/', search2, name="search2" ),
-    path('search/', busqueda_view, name="search" ),
 
+#CRUD
     path('tops_form/', TopsCreate.as_view(), name="create_top" ), 
     path('bottoms_form/', BottomsCreate.as_view(), name="create_bottom" ), 
     path('shoes_form/', ShoesCreate.as_view(), name="create_shoe" ), 
     path('accessories_form/', AccessoriesCreate.as_view(), name="create_accessory" ), 
 
 
+#Login Logout and Register
     path('login/', login_request, name="login"),
     path('logout/', LogoutView.as_view(template_name="aplicacion/logout.html"), name="logout"),
     path('register/', register, name="register"),
 
+#Edit User
     path('edit_user/', EditUser, name="edit_user"),
     path('add_avatar/', addAvatar, name="add_avatar"),
 ]

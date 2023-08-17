@@ -2,48 +2,53 @@
 {% load static %}
 
 {% block contenido %}
-
-
-                </section> 
-            </nav> 
-                <div class="text-center">    
-                <a class="btn btn-primary" href="{% url 'create_top' %}">Create New Top</a>
-                </div>
-            </nav> 
-</section>
-
-
-
-
-<table>
-    <tr>
-        <td width="200"><h2>Tops</h2></td>
-    </tr>
-</table>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Size</th>
-            <th>Contact</th>
-            <th>Photo</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for top in tops %}
-    <tr>
-        <td>{{ top.id }}</td>
-        <td>{{ top.name }}</td>
-        <td>{{ top.price }}</td>
-        <td>{{ top.size }}</td>
-        <td>{{ top.contact }}</td>
-        <td>{{ top.photo }}</td>
-
-    {% endfor %}
-
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <style>
+        .btn-create {
+            margin-top: 20px; 
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <a class="btn btn-primary btn-create" href="{% url 'create_top' %}">Create New Top</a>
+        </div>
+        
+        <h2>Tops</h2>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Size</th>
+                    <th>Contact</th>
+                    <th>Photo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for top in tops %}
+                <tr>
+                    <td>{{ top.id }}</td>
+                    <td>{{ top.name }}</td>
+                    <td>{{ top.price }}</td>
+                    <td>{{ top.size }}</td>
+                    <td>{{ top.contact }}</td>
+                    <td>{{ top.photo }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
 {% endblock contenido %}
+
 
 

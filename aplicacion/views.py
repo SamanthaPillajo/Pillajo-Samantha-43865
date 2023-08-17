@@ -36,27 +36,6 @@ def aboutme(request):
 
 
 
-#search
-@login_required
-def busqueda_view(request):
-    form = BusquedaForm(request.GET)
-    resultados = []
-
-    if form.is_valid():
-        termino = form.cleaned_data['termino_busqueda']
-        resultados += tops.objects.filter(name__icontains=termino)
-        resultados += bottoms.objects.filter(name__icontains=termino)
-        resultados += accessories.objects.filter(name__icontains=termino)
-        resultados += shoes.objects.filter(name__icontains=termino)
-
-    context = {
-        'form': form,
-        'resultados': resultados,
-    }
-
-    return render(request, 'aplicacion/busqueda.html', context)
-
-
 
 #CRUD create
 class TopsCreate(LoginRequiredMixin, CreateView):
@@ -73,6 +52,12 @@ class ShoesCreate(LoginRequiredMixin, CreateView):
     model = shoes
     fields = ['name', 'size', 'price', 'contact', 'photo']
     success_url = reverse_lazy('shoes')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.photo = self.request.FILES.get('photo')  # Manejar el archivo correctamente
+        return super().form_valid(form)
+
 
 class AccessoriesCreate(LoginRequiredMixin, CreateView):
     model = accessories
