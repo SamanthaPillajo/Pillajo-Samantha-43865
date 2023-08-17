@@ -32,10 +32,8 @@ Los usuarios pueden:
 - Cerrar Sesión
 - Registrar un nuevo usuario
 
-## Pruebas Realizadas
+## Casos de test
+https://docs.google.com/spreadsheets/d/1h7ersefGKglcaa86BmJFPkLN85v-x0I2eXZC0tyCIQY/edit?usp=sharing
 
-Ver archivo titulado "Pruebas Proyecto Python CH.xlsx" el cual se encuentra en el presente repositorio https://github.com/johannesgperez/ProyectoFinalMain.git
 
 ## Video Demostración
-
-https://youtu.be/O3tgo0Txl9Q
