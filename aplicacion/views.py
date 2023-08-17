@@ -33,24 +33,8 @@ def aboutme(request):
 
 
 
-#buscar producto
-#def searchProduct(request):
-    return render(request, "aplicacion/searchProduct.html")
-
-
-#def search2(request):
-    if request.GET['product']:
-        product = request.GET['product']
-        variabletops = tops.objects.filter(name__icontains=product)
-        return render(request,
-                      "aplicacion/resultsProduct.html",
-                      {'product': product, "products": variabletops})
-    return HttpResponse("No data to search!")
-
-
-
-
-
+#search
+@login_required
 def busqueda_view(request):
     form = BusquedaForm(request.GET)
     resultados = []
@@ -70,26 +54,28 @@ def busqueda_view(request):
     return render(request, 'aplicacion/busqueda.html', context)
 
 
+
 #CRUD create
-class TopsCreate(CreateView):
+class TopsCreate(LoginRequiredMixin, CreateView):
     model = tops
-    fields = ['name', 'size', 'price', 'contact']
+    fields = ['name', 'size', 'price', 'contact', 'photo']
     success_url = reverse_lazy('tops')
 
-class BottomsCreate(CreateView):
+class BottomsCreate(LoginRequiredMixin, CreateView):
     model = bottoms
-    fields = ['name', 'size', 'price', 'contact']
+    fields = ['name', 'size', 'price', 'contact', 'photo']
     success_url = reverse_lazy('bottoms')
 
-class ShoesCreate(CreateView):
+class ShoesCreate(LoginRequiredMixin, CreateView):
     model = shoes
-    fields = ['name', 'size', 'price', 'contact']
+    fields = ['name', 'size', 'price', 'contact', 'photo']
     success_url = reverse_lazy('shoes')
 
-class AccessoriesCreate(CreateView):
+class AccessoriesCreate(LoginRequiredMixin, CreateView):
     model = accessories
-    fields = ['name', 'size', 'price', 'contact']
+    fields = ['name', 'size', 'price', 'contact', 'photo']
     success_url = reverse_lazy('accessories')
+
 
 
 #login
@@ -102,6 +88,14 @@ def login_request(request):
             user_2 = authenticate(username=user, password=password)
             if user_2 is not None:
                 login(request, user)
+
+                try:
+                    avatar = Avatar.objects.get(user=request.user.id).image.url
+                except:
+                    avatar = '/media/avatars/default.png'
+                finally:
+                    request.session['avatar'] = avatar
+                
                 return render(request, "aplicacion/home.html", {"message": f"Welcome {user}"})
             else:
                 return render(request, "aplicacion/login.html", {"form":miForm, "message": "Invalid data"})
@@ -113,6 +107,7 @@ def login_request(request):
     return render(request, "aplicacion/login.html", {"form":miForm})    
 
 
+
 #register
 def register(request):
     if request.method == 'POST':
@@ -120,8 +115,55 @@ def register(request):
         if form.is_valid():  
             user = form.cleaned_data.get('username')
             form.save()
-            return render(request, "aplicacion/home.html", {"mensaje":"Usuario Creado"})        
+            return render(request, "aplicacion/home.html", {"message":"New user created"})        
     else:
         form = UserRegisterForm() 
 
     return render(request, "aplicacion/register.html", {"form": form})   
+
+
+
+#edit user and avatar
+@login_required
+def EditUser(request):
+    user = request.user
+    if request.method == "POST":
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            user.email = form.cleaned_data.get('email')
+            user.password1 = form.cleaned_data.get('password1')
+            user.password2 = form.cleaned_data.get('password2')
+            user.first_name = form.cleaned_data.get('first_name')
+            user.last_name = form.cleaned_data.get('last_name')
+            user.save()
+            return render(request, "aplicacion/home.html", {'message': f"User {user.username} successfully updated"})
+        else:
+            return render(request, "aplicacion/edituser.html", {'form': form})
+    else:
+        form = UserEditForm(instance=user)
+    return render(request, "aplicacion/edituser.html", {'form': form, 'usuario':user.username})
+
+
+@login_required
+def addAvatar(request):
+    if request.method == "POST":
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            u = User.objects.get(username=request.user)
+         
+            oldavatar = Avatar.objects.filter(user=u)
+            if len(oldavatar) > 0: 
+                oldavatar[0].delete()
+
+            #_________________ Grabo avatar nuevo
+            avatar = Avatar(user=u, image=form.cleaned_data['image'])
+            avatar.save()
+
+            #_________________ Almacenar en session la url del avatar para mostrarla en base
+            image = Avatar.objects.get(user=request.user.id).image.url
+            request.session['avatar'] = image
+
+            return render(request, "aplicacion/home.html")
+    else:
+        form = AvatarForm()
+    return render(request, "aplicacion/addavatar.html", {'form': form})

@@ -1,0 +1,16 @@
+{% extends 'aplicacion/home.html' %} 
+{% load static %} 
+{% block titulo %}Edit User{% endblock titulo %} 
+{% block cabecera %}Edit User {{ usuario }} {% endblock cabecera %} 
+{% block contenido %}
+    <br>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <button type="submit">Update User</button>
+    </form>
+
+
+{% endblock contenido %}

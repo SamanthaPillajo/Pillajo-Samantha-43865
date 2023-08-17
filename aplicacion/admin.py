@@ -6,3 +6,5 @@ admin.site.register(tops)
 admin.site.register(bottoms)
 admin.site.register(shoes)
 admin.site.register(accessories)
+admin.site.register(Avatar)
+

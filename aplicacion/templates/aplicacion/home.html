@@ -28,8 +28,13 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'shoes' %}">Shoes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'accessories' %}">Accesories</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'aboutme' %}">About me</a></li>
+                        <div class="text-center">
+                            <img src="{{ request.session.avatar }}" height="40px" weight="40px"/>
+                        </div>    
                         <a class="btn btn-primary" href="{% url 'logout' %}">Log Out</a>
-                        
+                        <li class="nav-item"><a class="nav-link" href="{% url 'edit_user' %}">Edit User</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'add_avatar' %}">Add Avatar</a></li>
+
                     </ul>
                   
                     <a class="btn btn-primary" href="{% url 'admin:index' %}">Admin</a>
@@ -54,7 +59,9 @@
 
 
         {% block contenido %}
-            aqui va el contenido segun cada pagina
+        <div class="text-center">
+        <h2>Log in or Sign Up to see our products!</h2>
+        </div>
         {% endblock contenido %}    
 
         

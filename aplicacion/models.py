@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class tops(models.Model):
@@ -6,6 +8,7 @@ class tops(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     size = models.CharField(max_length=50, blank=True, null=True)
     contact = models.CharField(max_length=50, blank=True, null=True)
+    photo = models.ImageField(upload_to ='products', null=True)
 
 
 class bottoms(models.Model):
@@ -13,12 +16,14 @@ class bottoms(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     size = models.CharField(max_length=50, blank=True, null=True)
     contact = models.CharField(max_length=50, blank=True, null=True)
+    photo = models.ImageField(upload_to ='products', null=True)
 
 class shoes(models.Model):
     name=models.CharField(max_length=50, blank=True, null=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     size = models.IntegerField()
     contact = models.CharField(max_length=50, blank=True, null=True)
+    photo = models.ImageField(upload_to ='products', null=True)
 
 
 class accessories(models.Model):
@@ -26,19 +31,17 @@ class accessories(models.Model):
   price = models.DecimalField(max_digits=6, decimal_places=2)
   size = models.CharField(max_length=50, blank=True, null=True)
   contact = models.CharField(max_length=50, blank=True, null=True)
+  photo = models.ImageField(upload_to ='products', null=True)
 
 
- #TALLAS = (
-        #(1, "Extra Small"),
-       # (2, "Small"),
-        #(3, "Medium"),
-        #(4, "Large"),
-        #(5, "Extra Large")#
 
-          ##TIPOS = (
-        #(1, "Collar"),
-        #(2, "Bracelete"),
-        #(3, "Bag"),
-        #(4, "Belt"),
-        #(5, "Hat"),
+class Avatar(models.Model):
+    image = models.ImageField(upload_to="avatars")
+    user = models.ForeignKey(User, on_delete= models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} [{self.image}]"
+
+
+
     
