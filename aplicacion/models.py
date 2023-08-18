@@ -23,7 +23,7 @@ class shoes(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     size = models.IntegerField()
     contact = models.CharField(max_length=50, blank=True, null=True)
-    photo = models.ImageField(upload_to ='products', null=True)
+    photo = models.ImageField(upload_to ='products', null=True, blank=True)
 
 
 class accessories(models.Model):

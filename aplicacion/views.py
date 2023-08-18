@@ -58,7 +58,7 @@ class BottomsCreate(LoginRequiredMixin, CreateView):
 
 class ShoesCreate(LoginRequiredMixin, CreateView):
     model = shoes
-    fields = ['name', 'size', 'price', 'contact', 'photo']
+    fields = '__all__'
     success_url = reverse_lazy('shoes')
     
 class AccessoriesCreate(LoginRequiredMixin, CreateView):

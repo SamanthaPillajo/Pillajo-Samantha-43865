@@ -7,8 +7,9 @@ from .models import *
 #Create
 class FormNewProduct(forms.ModelForm):
     class Meta:
-        model = tops
-        fields = ('name', 'size', 'price', 'contact', 'photo')
+        model = shoes
+        fields =  '__all__'
+
 
 #Register
 class UserRegisterForm(UserCreationForm):
