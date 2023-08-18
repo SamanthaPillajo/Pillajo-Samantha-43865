@@ -40,8 +40,16 @@ def aboutme(request):
 #CRUD create
 class TopsCreate(LoginRequiredMixin, CreateView):
     model = tops
-    fields = ['name', 'size', 'price', 'contact', 'photo']
+    form_class = FormNewProduct
     success_url = reverse_lazy('tops')
+    template_name = 'aplicacion/shoes_form.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(TopsCreate, self).form_valid(form)
+
+
+
 
 class BottomsCreate(LoginRequiredMixin, CreateView):
     model = bottoms
@@ -52,13 +60,7 @@ class ShoesCreate(LoginRequiredMixin, CreateView):
     model = shoes
     fields = ['name', 'size', 'price', 'contact', 'photo']
     success_url = reverse_lazy('shoes')
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.instance.photo = self.request.FILES.get('photo')  # Manejar el archivo correctamente
-        return super().form_valid(form)
-
-
+    
 class AccessoriesCreate(LoginRequiredMixin, CreateView):
     model = accessories
     fields = ['name', 'size', 'price', 'contact', 'photo']

@@ -1,12 +1,14 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import *
 
 
-class BusquedaForm(forms.Form):
-    termino_busqueda = forms.CharField(label='Buscar', max_length=100)
-
-
+#Create
+class FormNewProduct(forms.ModelForm):
+    class Meta:
+        model = tops
+        fields = ('name', 'size', 'price', 'contact', 'photo')
 
 #Register
 class UserRegisterForm(UserCreationForm):
