@@ -8,7 +8,7 @@ class tops(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     size = models.CharField(max_length=50, blank=True, null=True)
     contact = models.CharField(max_length=50, blank=True, null=True)
-    photo = models.ImageField(upload_to ='products', null=True)
+    photo = models.ImageField(upload_to ='products', null=True, blank=True)
 
 
 class bottoms(models.Model):
@@ -16,7 +16,7 @@ class bottoms(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     size = models.CharField(max_length=50, blank=True, null=True)
     contact = models.CharField(max_length=50, blank=True, null=True)
-    photo = models.ImageField(upload_to ='products', null=True)
+    photo = models.ImageField(upload_to ='products', null=True, blank=True)
 
 class shoes(models.Model):
     name=models.CharField(max_length=50, blank=True, null=True)
@@ -31,7 +31,7 @@ class accessories(models.Model):
   price = models.DecimalField(max_digits=6, decimal_places=2)
   size = models.CharField(max_length=50, blank=True, null=True)
   contact = models.CharField(max_length=50, blank=True, null=True)
-  photo = models.ImageField(upload_to ='products', null=True)
+  photo = models.ImageField(upload_to ='products', null=True, blank=True)
 
 
 

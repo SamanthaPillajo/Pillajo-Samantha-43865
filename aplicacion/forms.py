@@ -10,6 +10,21 @@ class FormNewProduct(forms.ModelForm):
         model = shoes
         fields =  '__all__'
 
+class FormNewProduct(forms.ModelForm):
+    class Meta:
+        model = tops
+        fields =  '__all__'
+
+class FormNewProduct(forms.ModelForm):
+    class Meta:
+        model = bottoms
+        fields =  '__all__'
+
+class FormNewProduct(forms.ModelForm):
+    class Meta:
+        model = accessories
+        fields =  '__all__'
+
 
 #Register
 class UserRegisterForm(UserCreationForm):

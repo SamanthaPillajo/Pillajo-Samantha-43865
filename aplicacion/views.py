@@ -18,7 +18,7 @@ def index(request):
 
 @login_required
 def tops_view(request):
-    ctx = {"top": tops.objects.all() }
+    ctx = {"tops": tops.objects.all()}
     return render(request, "aplicacion/tops.html", ctx)
 
 
@@ -40,20 +40,12 @@ def aboutme(request):
 #CRUD create
 class TopsCreate(LoginRequiredMixin, CreateView):
     model = tops
-    form_class = FormNewProduct
+    fields = '__all__'
     success_url = reverse_lazy('tops')
-    template_name = 'aplicacion/shoes_form.html'
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(TopsCreate, self).form_valid(form)
-
-
-
 
 class BottomsCreate(LoginRequiredMixin, CreateView):
     model = bottoms
-    fields = ['name', 'size', 'price', 'contact', 'photo']
+    fields = '__all__'
     success_url = reverse_lazy('bottoms')
 
 class ShoesCreate(LoginRequiredMixin, CreateView):
@@ -63,7 +55,7 @@ class ShoesCreate(LoginRequiredMixin, CreateView):
     
 class AccessoriesCreate(LoginRequiredMixin, CreateView):
     model = accessories
-    fields = ['name', 'size', 'price', 'contact', 'photo']
+    fields = '__all__'
     success_url = reverse_lazy('accessories')
 
 
