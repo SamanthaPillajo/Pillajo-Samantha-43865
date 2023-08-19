@@ -16,6 +16,8 @@ Administración
 user: admin1
 password:12345s
 
+Sitio Web (Página inicial): http://127.0.0.1:8000/aplicacion/home/
+
 
 Modelos: tipos de prenda
 1. Tops 
