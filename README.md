@@ -16,6 +16,8 @@ Administración
 user: admin1
 password:12345s
 
+Sitio Web (Página inicial): http://127.0.0.1:8000/aplicacion/home/
+
 
 Modelos: tipos de prenda
 1. Tops 
@@ -26,7 +28,8 @@ Modelos: tipos de prenda
 
 Los usuarios pueden:
 - Publicar prendas y agregar los respectivos detalles de cada una
-- Visualizar prendas anteriormente publicadas
+- Visualizar detalles de prendas anteriormente publicadas
+- Actualizar prendas
 - Editar el perfil de usuario y agregar un avatar
 - Iniciar Sesión
 - Cerrar Sesión
