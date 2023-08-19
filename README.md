@@ -28,7 +28,8 @@ Modelos: tipos de prenda
 
 Los usuarios pueden:
 - Publicar prendas y agregar los respectivos detalles de cada una
-- Visualizar prendas anteriormente publicadas
+- Visualizar detalles de prendas anteriormente publicadas
+- Actualizar prendas
 - Editar el perfil de usuario y agregar un avatar
 - Iniciar Sesión
 - Cerrar Sesión
