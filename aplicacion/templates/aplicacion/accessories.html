@@ -2,50 +2,79 @@
 {% load static %}
 
 {% block contenido %}
-<!DOCTYPE html>
-<html>
-<head>
-    
-    <style>
-        .btn-create {
-            margin-top: 20px; 
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
+<style>
+    .btn-create {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .btn-detail {
+        --bs-btn-bg: green;
+        --bs-btn-bg-hover: darkgreen;
+        --bs-btn-bg-focus: darkgreen;
+        --bs-btn-bg-active: darkgreen;
+        --bs-btn-border-color: darkgreen;
+        --bs-btn-border-color-hover: darkgreen;
+        --bs-btn-border-color-focus: darkgreen;
+        --bs-btn-border-color-active: darkgreen;
+        --bs-btn-color: white;
+    }
+
+    .btn-update {
+        --bs-btn-bg: blue;
+        --bs-btn-bg-hover: darkblue;
+        --bs-btn-bg-focus: darkblue;
+        --bs-btn-bg-active: darkblue;
+        --bs-btn-border-color: darkblue;
+        --bs-btn-border-color-hover: darkblue;
+        --bs-btn-border-color-focus: darkblue;
+        --bs-btn-border-color-active: darkblue;
+        --bs-btn-color: white;
+    }
+</style>
+
     <div class="container">
         <div class="text-center">
             <a class="btn btn-primary btn-create" href="{% url 'create_accessory' %}">Create New Accessory</a>
         </div>
-        
+
         <h2>Accessories</h2>
-        
+
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Price</th>
-                    <th>Size</th>
-                    <th>Contact</th>
                     <th>Photo</th>
+                  
                 </tr>
             </thead>
             <tbody>
-                {% for top in tops %}
-                <tr>
-                    <td>{{ top.id }}</td>
-                    <td>{{ top.name }}</td>
-                    <td>{{ top.price }}</td>
-                    <td>{{ top.size }}</td>
-                    <td>{{ top.contact }}</td>
-                    <td>{{ top.photo }}</td>
-                </tr>
+                {% for accessory in accessories %}
+                    <tr>
+                        <td>{{ accessory.id }}</td>
+                        <td>{{ accessory.name }}</td>
+                        <td>
+                            <img src="{{ accessory.photo.url }}" style="width: 200px; height: 150px;" alt="">
+                        </td>
+                        <td>
+                            <a href="{% url 'delete_accessory' accessory.id %}" class="btn btn-danger"
+                               style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                Delete
+                            </a>
+                            <a href="{% url 'detail_accessory' accessory.id %}" class="btn btn-detail"
+                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                   Detail
+             </a>
+             <a href="{% url 'update_accessory' accessory.id %}" class="btn btn-update"
+                       style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                       Update
+                 </a>
+                        </td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-</body>
-</html>
 {% endblock contenido %}
+

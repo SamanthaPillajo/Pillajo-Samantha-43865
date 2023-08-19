@@ -1,0 +1,43 @@
+{% extends 'aplicacion/home.html' %} 
+{% load static %} 
+
+{% block contenido %}
+<table>
+    <tr>
+        <td><h2>Tops</h2></td>
+    </tr>
+</table>
+
+<table class="table">
+  <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Size</th>
+        <th>Contact</th>
+        <th>Photo</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+        <td>{{ top.id }}</td>
+        <td>{{ top.name }}</td>
+        <td>{{ top.price }}</td>
+        <td>{{ top.size }}</td>
+        <td>{{ top.contact }}</td>
+        <td>
+            <img src="{{ top.photo.url }}" style="width: 200px; height: 150px;" alt="">
+    
+    </tr>
+
+  </tbody>
+</table>
+<a
+href="{% url 'tops' %}"
+class="btn btn-danger"
+style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+><i class="fa fa-share fa-sm" title="List Back">Back</i>
+</a>
+{% endblock contenido %}

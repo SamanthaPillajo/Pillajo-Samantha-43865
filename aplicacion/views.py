@@ -3,6 +3,11 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 from django.views.generic import CreateView
+from django.views.generic import DeleteView
+from django.views.generic import DetailView
+from django.views.generic import UpdateView
+
+
 from django.urls import reverse_lazy
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -21,16 +26,22 @@ def tops_view(request):
     ctx = {"tops": tops.objects.all()}
     return render(request, "aplicacion/tops.html", ctx)
 
-
+@login_required
 def bottoms_view(request):
-    return render(request, "aplicacion/bottoms.html")
+    ctx = {"bottoms": bottoms.objects.all()}
+    return render(request, "aplicacion/bottoms.html", ctx)
 
+@login_required
 def shoes_view(request):
-    return render(request, "aplicacion/shoes.html")
+    ctx = {"shoes": shoes.objects.all()}
+    return render(request, "aplicacion/shoes.html", ctx)
 
+@login_required
 def accessories_view(request):
-    return render(request, "aplicacion/accessories.html")
+    ctx = {"accessories": accessories.objects.all()}
+    return render(request, "aplicacion/accessories.html", ctx)
 
+@login_required
 def aboutme(request):
     return render(request, "aplicacion/aboutme.html")
 
@@ -58,6 +69,71 @@ class AccessoriesCreate(LoginRequiredMixin, CreateView):
     fields = '__all__'
     success_url = reverse_lazy('accessories')
 
+
+
+
+#CRUD delete
+class Topsdelete(LoginRequiredMixin, DeleteView):
+    model = tops
+    success_url = reverse_lazy('tops')  
+
+class Bottomsdelete(LoginRequiredMixin, DeleteView):
+    model = bottoms
+    success_url = reverse_lazy('bottoms')  
+
+class Shoesdelete(LoginRequiredMixin, DeleteView):
+    model = shoes
+    success_url = reverse_lazy('shoes')  
+
+class Accessoriesdelete(LoginRequiredMixin, DeleteView):
+    model = accessories
+    success_url = reverse_lazy('accessories')  
+
+
+
+#CRUD read
+class TopsDetailView(LoginRequiredMixin, DetailView):
+    model = tops  
+    template_name = 'aplicacion/detail_top.html'  
+    context_object_name = 'top' 
+
+class BottomsDetailView(LoginRequiredMixin, DetailView):
+    model = bottoms  
+    template_name = 'aplicacion/detail_bottom.html'  
+    context_object_name = 'bottom' 
+
+class ShoesDetailView(LoginRequiredMixin, DetailView):
+    model = shoes  
+    template_name = 'aplicacion/detail_shoe.html'  
+    context_object_name = 'shoe' 
+
+class AccessoriesDetailView(LoginRequiredMixin, DetailView):
+    model = accessories  
+    template_name = 'aplicacion/detail_accessory.html'  
+    context_object_name = 'accessory'
+
+
+
+#CRUD update
+class TopsUpdate(LoginRequiredMixin, UpdateView):
+    model = tops
+    fields = ['name', 'price', 'size', 'contact', 'photo']
+    success_url = reverse_lazy('tops') 
+
+class BottomsUpdate(LoginRequiredMixin, UpdateView):
+    model = bottoms
+    fields = ['name', 'price', 'size', 'contact', 'photo']
+    success_url = reverse_lazy('bottoms') 
+
+class ShoesUpdate(LoginRequiredMixin, UpdateView):
+    model = shoes
+    fields = ['name', 'price', 'size', 'contact', 'photo']
+    success_url = reverse_lazy('shoes') 
+
+class AccessoriesUpdate(LoginRequiredMixin, UpdateView):
+    model = accessories
+    fields = ['name', 'price', 'size', 'contact', 'photo']
+    success_url = reverse_lazy('accessories') 
 
 
 #login
